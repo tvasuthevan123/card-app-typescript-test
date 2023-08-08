@@ -32,28 +32,35 @@ export default function AllEntries() {
             <p className="text-center text-lg font-light md:mt-2 md:mb-4 mt-1 mb-3 dark:text-white">
               {entry.description}
             </p>
-            <section className="flex items-center justify-between flex-col md:flex-row pt-2 md:pt-0">
-              <div className="flex justify-center">
-                <button
-                  onClick={() => {
-                    deleteEntry(entry.id as string);
-                  }}
-                  className="m-1 md:m-2 p-1 font-semibold rounded-md bg-red-500 hover:bg-red-700"
-                >
-                  ✖
-                </button>
-                <button
-                  onClick={() => {
-                    navigate(`/edit/${entry.id}`, { replace: true });
-                  }}
-                  className="m-1 md:m-2 p-1 font-semibold rounded-md bg-blue-500 hover:bg-blue-700"
-                >
-                  🖊
-                </button>
-              </div>
+            <section className="flex justify-between items-center px-1 dark:text-white">
+              <span>Created At:</span>
               <time className="text-right text-sm md:text-lg dark:text-white">
                 {new Date(entry.created_at.toString()).toLocaleDateString()}
               </time>
+            </section>
+            <section className="flex justify-between items-center px-1 dark:text-white">
+              <span>Scheduled For:</span>
+              <time className="text-right text-sm md:text-lg dark:text-white">
+                {new Date(entry.scheduled_for.toString()).toLocaleDateString()}
+              </time>
+            </section>
+            <section className="flex items-center justify-between flex-col md:flex-row pt-2 md:pt-0">
+              <button
+                onClick={() => {
+                  deleteEntry(entry.id as string);
+                }}
+                className="m-1 md:m-2 p-1 font-semibold rounded-md bg-red-500 hover:bg-red-700"
+              >
+                ✖
+              </button>
+              <button
+                onClick={() => {
+                  navigate(`/edit/${entry.id}`, { replace: true });
+                }}
+                className="m-1 md:m-2 p-1 font-semibold rounded-md bg-blue-500 hover:bg-blue-700"
+              >
+                🖊
+              </button>
             </section>
           </div>
         );

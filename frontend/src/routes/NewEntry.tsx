@@ -3,7 +3,7 @@ import { Entry, EntryContextType } from "../@types/context";
 import { EntryContext } from "../utilities/globalContext";
 
 export default function NewEntry() {
-  const emptyEntry: Entry = { title: "", description: "", created_at: new Date() };
+  const emptyEntry: Entry = { title: "", description: "", created_at: new Date(), scheduled_for: new Date() };
   const { saveEntry } = useContext(EntryContext) as EntryContextType;
   const [newEntry, setNewEntry] = useState<Entry>(emptyEntry);
   const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -17,9 +17,9 @@ export default function NewEntry() {
     setNewEntry(emptyEntry);
   };
   return (
-    <section className="flex justify-center flex-col w-fit ml-auto mr-auto mt-10 gap-5 bg-gray-300 dark:bg-slate-600 p-8 rounded-md">
+    <section className="flex justify-center flex-col w-fit ml-auto mr-auto mt-10 bg-gray-300 dark:bg-slate-600 p-8 rounded-md">
       <input
-        className="p-3 rounded-md dark:bg-slate-400 dark:text-white dark:placeholder:text-white"
+        className="mb-3 p-3 rounded-md dark:bg-slate-400 dark:text-white dark:placeholder:text-white"
         type="text"
         placeholder="Title"
         name="title"
@@ -27,17 +27,26 @@ export default function NewEntry() {
         onChange={handleInputChange}
       />
       <textarea
-        className="p-3 rounded-md dark:bg-slate-400 dark:text-white dark:placeholder:text-white"
+        className="mb-2 p-3 rounded-md dark:bg-slate-400 dark:text-white dark:placeholder:text-white"
         placeholder="Description"
         name="description"
         value={newEntry.description}
         onChange={handleInputChange}
       />
+      <label className="mb-1 font-bold dark:text-white">Created At</label>
       <input
-        className="p-3 rounded-md dark:bg-slate-400 dark:text-white dark:placeholder:text-white"
+        className="mb-2 p-3 rounded-md dark:bg-slate-400 dark:text-white dark:placeholder:text-white"
         type="date"
         name="created_at"
         value={new Date(newEntry.created_at).toISOString().split("T")[0]}
+        onChange={handleInputChange}
+      />
+      <label className="mb-1 font-bold dark:text-white">Scheduled For</label>
+      <input
+        className="mb-3 p-3 rounded-md dark:bg-slate-400 dark:text-white dark:placeholder:text-white"
+        type="date"
+        name="scheduled_for"
+        value={new Date(newEntry.scheduled_for).toISOString().split("T")[0]}
         onChange={handleInputChange}
       />
       <button
